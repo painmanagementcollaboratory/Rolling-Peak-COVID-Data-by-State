@@ -40,7 +40,7 @@ def download_files():
 
     # copy to my repo
     for the_file in list_of_files:
-        shutil.copy(the_file, config.config['HOME_DIRECTORY'] + '/COVID-19-Deaths-Peak/data/')
+        shutil.copy(the_file, config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State/data/')
 
     return datetime.datetime.now()
 
