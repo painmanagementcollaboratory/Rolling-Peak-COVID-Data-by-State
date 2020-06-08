@@ -291,7 +291,7 @@ def process_states_data():
 
     timestr = time.strftime("%Y%m%d")
 
-    TotalDF.to_csv('COVID-Peaks_%s.csv' % timestr, encoding='utf-8')
+    TotalDF.to_csv('COVID-Peaks_%s.csv' % timestr, encoding='utf-8', index=False)
 
 
 def commit_to_repo():
