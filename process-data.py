@@ -137,7 +137,12 @@ def process_states_data():
     deathDF = deaths.transpose()
     deathDF.head()
 
-    Cols = list(deathDF.columns)
+    cases = df_cases
+    caseDF = cases.transpose()
+    caseDF.head()
+
+    DeathCols = list(deathDF.columns)
+    CaseCols = list(caseDF.columns)
 
     KeepList = ['State', 'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
                 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia',
@@ -149,75 +154,144 @@ def process_states_data():
                 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
                 'Wyoming']
 
-    DropList = np.setdiff1d(Cols, KeepList)
-    C19Deaths = deathDF.drop(DropList, axis=1)
+    DeathDropList = np.setdiff1d(DeathCols, KeepList)
+    CaseDropList = np.setdiff1d(CaseCols,KeepList)
+    C19Deaths = deathDF.drop(DeathDropList, axis=1)
+    C19Cases = caseDF.drop(CaseDropList,axis=1)
 
     States = list(C19Deaths.columns)
 
     DailyDeaths = C19Deaths.diff()
+    DailyCases = C19Cases.diff()
 
-    ThreeDayAvg = pd.DataFrame()
-    SevenDayAvg = pd.DataFrame()
-    NineDayAvg = pd.DataFrame()
-
-    for col in States:
-        ThreeDayAvg[col] = DailyDeaths.loc[:, col].rolling(window=3).mean()
-        SevenDayAvg[col] = DailyDeaths.loc[:, col].rolling(window=7).mean()
-        NineDayAvg[col] = DailyDeaths.loc[:, col].rolling(window=9).mean()
-
-    OneDayFrame = pd.DataFrame()
-    ThreeDayFrame = pd.DataFrame()
-    SevenDayFrame = pd.DataFrame()
-    NineDayFrame = pd.DataFrame()
+    # Deaths
+    ThreeDayAvgD = pd.DataFrame()
+    SevenDayAvgD = pd.DataFrame()
+    NineDayAvgD = pd.DataFrame()
 
     for col in States:
-        max1 = DailyDeaths[col].max()
-        indexMax1 = DailyDeaths[col].idxmax()
-        max3 = ThreeDayAvg[col].max()
-        indexMax3 = ThreeDayAvg[col].idxmax()
-        max7 = SevenDayAvg[col].max()
-        indexMax7 = SevenDayAvg[col].idxmax()
-        max9 = NineDayAvg[col].max()
-        indexMax9 = NineDayAvg[col].idxmax()
-        OneDayFrame[col] = [max1, indexMax1]
-        ThreeDayFrame[col] = [max3, indexMax3]
-        SevenDayFrame[col] = [max7, indexMax7]
-        NineDayFrame[col] = [max9, indexMax9]
+        ThreeDayAvgD[col] = DailyDeaths.loc[:, col].rolling(window=3).mean()
+        SevenDayAvgD[col] = DailyDeaths.loc[:, col].rolling(window=7).mean()
+        NineDayAvgD[col] = DailyDeaths.loc[:, col].rolling(window=9).mean()
 
-    OneDayMaxFrame = pd.DataFrame()
-    OneDayMaxFrame = OneDayFrame.transpose()
-    OneDayMaxFrame = OneDayMaxFrame.reset_index()
-    OneDayMaxFrame = OneDayMaxFrame.rename(columns={'index': 'State', 0: 'Peak1DayDeaths', 1: 'Peak1DayDate'})
+    # Cases
+    ThreeDayAvgC = pd.DataFrame()
+    SevenDayAvgC = pd.DataFrame()
+    NineDayAvgC = pd.DataFrame()
 
-    ThreeDayAvgFrame = pd.DataFrame()
-    ThreeDayAvgFrame = ThreeDayFrame.transpose()
-    ThreeDayAvgFrame = ThreeDayAvgFrame.reset_index()
-    ThreeDayAvgFrame = ThreeDayAvgFrame.rename(columns={'index': 'State', 0: 'Peak3DayAvgDeaths', 1: 'Peak3DayAvgDate'})
+    for col in States:
+        ThreeDayAvgC[col] = DailyCases.loc[:, col].rolling(window=3).mean()
+        SevenDayAvgC[col] = DailyCases.loc[:, col].rolling(window=7).mean()
+        NineDayAvgC[col] = DailyCases.loc[:, col].rolling(window=9).mean()
 
-    SevenDayAvgFrame = pd.DataFrame()
-    SevenDayAvgFrame = SevenDayFrame.transpose()
-    SevenDayAvgFrame = SevenDayAvgFrame.reset_index()
-    SevenDayAvgFrame = SevenDayAvgFrame.rename(columns={'index': 'State', 0: 'Peak7DayAvgDeaths', 1: 'Peak7DayAvgDate'})
+    # Deaths
+    OneDayFrameD = pd.DataFrame()
+    ThreeDayFrameD = pd.DataFrame()
+    SevenDayFrameD = pd.DataFrame()
+    NineDayFrameD = pd.DataFrame()
 
-    NineDayAvgFrame = pd.DataFrame()
-    NineDayAvgFrame = NineDayFrame.transpose()
-    NineDayAvgFrame = NineDayAvgFrame.reset_index()
-    NineDayAvgFrame = NineDayAvgFrame.rename(columns={'index': 'State', 0: 'Peak9DayAvgDeaths', 1: 'Peak9DayAvgDate'})
+    for col in States:
+        max1D = DailyDeaths[col].max()
+        indexMax1D = DailyDeaths[col].idxmax()
+        max3D = ThreeDayAvgD[col].max()
+        indexMax3D = ThreeDayAvgD[col].idxmax()
+        max7D = SevenDayAvgD[col].max()
+        indexMax7D = SevenDayAvgD[col].idxmax()
+        max9D = NineDayAvgD[col].max()
+        indexMax9D = NineDayAvgD[col].idxmax()
+        OneDayFrameD[col] = [max1D, indexMax1D]
+        ThreeDayFrameD[col] = [max3D, indexMax3D]
+        SevenDayFrameD[col] = [max7D, indexMax7D]
+        NineDayFrameD[col] = [max9D, indexMax9D]
+
+    # Cases
+    OneDayFrameC = pd.DataFrame()
+    ThreeDayFrameC = pd.DataFrame()
+    SevenDayFrameC = pd.DataFrame()
+    NineDayFrameC = pd.DataFrame()
+
+    for col in States:
+        max1C = DailyCases[col].max()
+        indexMax1C = DailyCases[col].idxmax()
+        max3C = ThreeDayAvgC[col].max()
+        indexMax3C = ThreeDayAvgC[col].idxmax()
+        max7C = SevenDayAvgC[col].max()
+        indexMax7C = SevenDayAvgC[col].idxmax()
+        max9C = NineDayAvgC[col].max()
+        indexMax9C = NineDayAvgC[col].idxmax()
+        OneDayFrameC[col] = [max1C, indexMax1C]
+        ThreeDayFrameC[col] = [max3C, indexMax3C]
+        SevenDayFrameC[col] = [max7C, indexMax7C]
+        NineDayFrameC[col] = [max9C, indexMax9C]
+
+    # Deaths
+    OneDayMaxFrameD = pd.DataFrame()
+    OneDayMaxFrameD = OneDayFrameD.transpose()
+    OneDayMaxFrameD = OneDayMaxFrameD.reset_index()
+    OneDayMaxFrameD = OneDayMaxFrameD.rename(columns={'index': 'State', 0: 'Peak1DayDeaths', 1: 'Peak1DayDeathDate'})
+
+    ThreeDayAvgFrameD = pd.DataFrame()
+    ThreeDayAvgFrameD = ThreeDayFrameD.transpose()
+    ThreeDayAvgFrameD = ThreeDayAvgFrameD.reset_index()
+    ThreeDayAvgFrameD = ThreeDayAvgFrameD.rename(columns={'index': 'State', 0: 'Peak3DayAvgDeaths', 1: 'Peak3DayAvgDeathDate'})
+
+    SevenDayAvgFrameD = pd.DataFrame()
+    SevenDayAvgFrameD = SevenDayFrameD.transpose()
+    SevenDayAvgFrameD = SevenDayAvgFrameD.reset_index()
+    SevenDayAvgFrameD = SevenDayAvgFrameD.rename(columns={'index': 'State', 0: 'Peak7DayAvgDeaths', 1: 'Peak7DayAvgDeathDate'})
+
+    NineDayAvgFrameD = pd.DataFrame()
+    NineDayAvgFrameD = NineDayFrameD.transpose()
+    NineDayAvgFrameD = NineDayAvgFrameD.reset_index()
+    NineDayAvgFrameD = NineDayAvgFrameD.rename(columns={'index': 'State', 0: 'Peak9DayAvgDeaths', 1: 'Peak9DayAvgDeathDate'})
+
+    # Cases
+
+    OneDayMaxFrameC = pd.DataFrame()
+    OneDayMaxFrameC = OneDayFrameC.transpose()
+    OneDayMaxFrameC = OneDayMaxFrameC.reset_index()
+    OneDayMaxFrameC = OneDayMaxFrameC.rename(columns={'index': 'State', 0: 'Peak1DayCases', 1: 'Peak1DayCaseDate'})
+
+    ThreeDayAvgFrameC = pd.DataFrame()
+    ThreeDayAvgFrameC = ThreeDayFrameC.transpose()
+    ThreeDayAvgFrameC = ThreeDayAvgFrameC.reset_index()
+    ThreeDayAvgFrameC = ThreeDayAvgFrameC.rename(columns={'index': 'State', 0: 'Peak3DayAvgCases', 1: 'Peak3DayAvgCaseDate'})
+
+    SevenDayAvgFrameC = pd.DataFrame()
+    SevenDayAvgFrameC = SevenDayFrameC.transpose()
+    SevenDayAvgFrameC = SevenDayAvgFrameC.reset_index()
+    SevenDayAvgFrameC = SevenDayAvgFrameC.rename(columns={'index': 'State', 0: 'Peak7DayAvgCases', 1: 'Peak7DayAvgCaseDate'})
+
+    NineDayAvgFrameC = pd.DataFrame()
+    NineDayAvgFrameC = NineDayFrameC.transpose()
+    NineDayAvgFrameC = NineDayAvgFrameC.reset_index()
+    NineDayAvgFrameC = NineDayAvgFrameC.rename(columns={'index': 'State', 0: 'Peak9DayAvgCases', 1: 'Peak9DayAvgCaseDate'})
+
 
     TotalDF = pd.DataFrame()
     TotalDF['State'] = States
-    TotalDF['Peak1DayDeaths'] = OneDayMaxFrame['Peak1DayDeaths']
-    TotalDF['Peak1DayDate'] = OneDayMaxFrame['Peak1DayDate']
-    TotalDF['Peak3DayAvgDeaths'] = ThreeDayAvgFrame['Peak3DayAvgDeaths']
-    TotalDF['Peak3DayAvgDate'] = ThreeDayAvgFrame['Peak3DayAvgDate']
-    TotalDF['Peak7DayAvgDeaths'] = SevenDayAvgFrame['Peak7DayAvgDeaths']
-    TotalDF['Peak7DayAvgDate'] = SevenDayAvgFrame['Peak7DayAvgDate']
-    TotalDF['Peak9DayAvgDeaths'] = NineDayAvgFrame['Peak9DayAvgDeaths']
-    TotalDF['Peak9DayAvgDate'] = NineDayAvgFrame['Peak9DayAvgDate']
+    # Cases
+    TotalDF['Peak1DayCases'] = OneDayMaxFrameC['Peak1DayCases']
+    TotalDF['Peak1DayCasesDate'] = OneDayMaxFrameC['Peak1DayCaseDate']
+    TotalDF['Peak3DayAvgCases'] = ThreeDayAvgFrameC['Peak3DayAvgCases']
+    TotalDF['Peak3DayAvgCasesDate'] = ThreeDayAvgFrameC['Peak3DayAvgCaseDate']
+    TotalDF['Peak7DayAvgCases'] = SevenDayAvgFrameC['Peak7DayAvgCases']
+    TotalDF['Peak7DayAvgCasesDate'] = SevenDayAvgFrameC['Peak7DayAvgCaseDate']
+    TotalDF['Peak9DayAvgCases'] = NineDayAvgFrameC['Peak9DayAvgCases']
+    TotalDF['Peak9DayAvgCasesDate'] = NineDayAvgFrameC['Peak9DayAvgCaseDate']
+    #Deaths
+    TotalDF['Peak1DayDeaths'] = OneDayMaxFrameD['Peak1DayDeaths']
+    TotalDF['Peak1DayDeathsDate'] = OneDayMaxFrameD['Peak1DayDeathDate']
+    TotalDF['Peak3DayAvgDeaths'] = ThreeDayAvgFrameD['Peak3DayAvgDeaths']
+    TotalDF['Peak3DayAvgDeathsDate'] = ThreeDayAvgFrameD['Peak3DayAvgDeathDate']
+    TotalDF['Peak7DayAvgDeaths'] = SevenDayAvgFrameD['Peak7DayAvgDeaths']
+    TotalDF['Peak7DayAvgDeathsDate'] = SevenDayAvgFrameD['Peak7DayAvgDeathDate']
+    TotalDF['Peak9DayAvgDeaths'] = NineDayAvgFrameD['Peak9DayAvgDeaths']
+    TotalDF['Peak9DayAvgDeathsDate'] = NineDayAvgFrameD['Peak9DayAvgDeathDate']
 
     timestr = time.strftime("%Y%m%d")
 
-    TotalDF.to_csv('COVID-Deaths-Peaks_%s.csv' % timestr, encoding='utf-8')
+    TotalDF.to_csv('COVID-Peaks_%s.csv' % timestr, encoding='utf-8')
 
 
 def commit_to_repo():
