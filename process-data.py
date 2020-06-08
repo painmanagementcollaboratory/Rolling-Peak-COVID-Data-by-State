@@ -27,22 +27,29 @@ def download_files():
     # first you have to run
     #  $ git clone https://github.com/CSSEGISandData/COVID-19.git
     # then add the home path to your repos to the config.py file
+    """ You don't need to run this above - just make the home path for your own copying.
+        Otherwise, use the raw csv's and reference.  Then you aren't storing 1/4GB locally.
+    """
 
     # update local repo
-    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '/COVID-19; git pull origin master', shell=True)
+    #subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '/COVID-19; git pull origin master', shell=True)
 
     # copy file to my repo for processing
     print('Copying Files')
 
     #  get all daily files
     list_of_files = glob.glob(
-        config.config['HOME_DIRECTORY'] + '/COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/*.csv')
+    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/*.csv')
+    #config.config['HOME_DIRECTORY'] + '/COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/*.csv')
 
     # copy to my repo
     for the_file in list_of_files:
         shutil.copy(the_file, config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State/data/')
 
     return datetime.datetime.now()
+
+    ####
+    #('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/*.csv')
 
 
 
