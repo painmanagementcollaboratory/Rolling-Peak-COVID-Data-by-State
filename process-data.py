@@ -289,9 +289,9 @@ def process_states_data():
     TotalDF['Peak9DayAvgDeaths'] = NineDayAvgFrameD['Peak9DayAvgDeaths']
     TotalDF['Peak9DayAvgDeathsDate'] = NineDayAvgFrameD['Peak9DayAvgDeathDate']
 
-    timestr = time.strftime("%Y%m%d")
+    #timestr = time.strftime("%Y%m%d")
 
-    TotalDF.to_csv('COVID-Peaks_%s.csv' % timestr, encoding='utf-8', index=False)
+    TotalDF.to_csv('COVID-Peaks.csv', encoding='utf-8', index=False)
 
 
 def commit_to_repo():
