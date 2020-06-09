@@ -32,7 +32,7 @@ def download_files():
     """
 
     # update local repo
-    #subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '/COVID-19; git pull origin master', shell=True)
+    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State; git pull origin master', shell=True)
 
     # copy file to my repo for processing
     print('Copying Files')
