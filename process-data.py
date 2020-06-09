@@ -60,9 +60,9 @@ def process_states_data():
     start_date = datetime.datetime(2020, 3,
                                    22)  # this is the date JH daily files were in the correct format for processing
     today_date = datetime.datetime.now()
-    cases_datafile = 'COVID-19-Cases-USA-By-State.csv'
+    cases_datafile = data_folder + 'COVID-19-Cases-USA-By-State.csv'
     cases_starter_datefile = data_folder + 'COVID-19-Cases-USA-By-State-Starter.csv'
-    death_datafile = 'COVID-19-Deaths-USA-By-State.csv'
+    death_datafile = data_folder + 'COVID-19-Deaths-USA-By-State.csv'
     death_starter_datefile = data_folder + 'COVID-19-Deaths-USA-By-State-Starter.csv'
 
     try:
