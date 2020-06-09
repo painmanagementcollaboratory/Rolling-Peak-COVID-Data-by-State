@@ -29,13 +29,13 @@ def download_files():
     # then add the home path to your repos to the config.py file
 
     # update local repo
-    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State; git pull origin master', shell=True)
+    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '; git pull origin master', shell=True)
 
     # Call for Clone of JHU Data, later deleted before committing to Repo
     print('Cloning JHU Data')
     subprocess.call('git clone https://github.com/CSSEGISandData/COVID-19.git', shell=True)
     global dir_path
-    dir_path = config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State/COVID-19'
+    dir_path = config.config['HOME_DIRECTORY'] + '/COVID-19'
 
     # copy file to my repo for processing
     print('Copying Files')
@@ -47,7 +47,7 @@ def download_files():
 
     # copy to my repo
     for the_file in list_of_files:
-        shutil.copy(the_file, config.config['HOME_DIRECTORY'] + '/Rolling-Peak-COVID-Deaths-by-State/data/')
+        shutil.copy(the_file, config.config['HOME_DIRECTORY'] + '/data/')
 
     return datetime.datetime.now()
 
