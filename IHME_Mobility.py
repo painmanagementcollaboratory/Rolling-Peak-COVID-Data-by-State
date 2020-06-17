@@ -42,9 +42,10 @@ def process_Mobility():
         StateZipList = list(zip(StateDates,StateMobsVals))
 
         for row in StateZipList:
-            MobsStates.loc[state, row[0]] = row[1] # need to fix this line
+            stateInd = np.where(MobsStates['State'] == state)[0]
+            MobsStates.loc[stateInd, row[0]] = row[1]
 
-
+    MobsStates.to_csv('StateMobility.csv', encoding='utf-8', index=False)
 
 """
 Run Commands
