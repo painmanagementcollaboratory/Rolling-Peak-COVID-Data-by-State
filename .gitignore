@@ -1,3 +1,6 @@
+# IHME Stats File
+/IHMEStats.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
