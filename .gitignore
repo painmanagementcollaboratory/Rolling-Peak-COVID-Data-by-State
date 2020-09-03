@@ -1,6 +1,10 @@
 # IHME Stats File
 IHMEStats.csv
 
+#Daily File
+COVID-DailyDeaths.csv
+COVID-DailyCases.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -166,6 +166,8 @@ def process_states_data():
 
     DailyDeaths = C19Deaths.diff()
     DailyCases = C19Cases.diff()
+    DailyDeaths.to_csv('COVID-DailyDeaths.csv', encoding='utf-8', index=False)
+    DailyCases.to_csv('COVID-DailyCases.csv', encoding='utf-8', index=False)
 
     # Deaths
     ThreeDayAvgD = pd.DataFrame()
