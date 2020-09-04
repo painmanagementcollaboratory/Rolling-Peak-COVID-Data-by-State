@@ -116,7 +116,7 @@ def process_states_data():
             if index in df_cases.index:
                 df_cases.at[index, daily_date] = row['Confirmed']
 
-                # insert empty column for current date into summary file
+        # insert empty column for current date into summary file
         dft = pd.DataFrame({daily_date: np.array([0] * df_deaths.shape[0], dtype='int32'), })
         df_deaths.insert(df_deaths.shape[1], daily_date, dft.values)
 
