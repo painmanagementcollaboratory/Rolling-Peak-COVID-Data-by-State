@@ -1,6 +1,6 @@
 # Rolling Peak COVID Case and Death by State
 
-This code uses data from the Johns Hopkins COVID Data Repository, https://github.com/CSSEGISandData/COVID-19.  It calculates the peak single day deaths & cases by state and the peak 3-, 5- and 9-day average peak death & case rate by state.  It returns a CSV with each of these values and the date on which they occurred.  Rows are listed by state.
+This code uses data from the Johns Hopkins COVID Data Repository, https://github.com/CSSEGISandData/COVID-19.  It calculates the peak single day deaths & cases by state and the peak 3-, 5- and 9-day average peak death & case rate by state.  It returns a CSV with each of these values and the date on which they occurred.  Rows are listed by state. This file will update automatically at 0800 UTC daily.
 
 # Social Distancing Mobility Measure
 
