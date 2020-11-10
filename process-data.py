@@ -308,11 +308,12 @@ def commit_to_repo():
 def command_verification(command):
     print('please review following commands')
     print(command)
-    result = input('Press ENTER to start: (type no to stop) ')
-    if result == 'no':
-        return False
-    else:
-        return True
+    return True # edited to remove interaction with code to allow automation
+    #result = input('Press ENTER to start: (type no to stop) ')
+    #if result == 'no':
+    #    return False
+    #else:
+    #    return True
 
 
 def main():
