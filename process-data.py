@@ -27,9 +27,9 @@ def download_files():
     # first you have to run
     #  $ git clone https://github.com/CSSEGISandData/COVID-19.git
     # then add the home path to your repos to the config.py file
-
+    #subprocess.call('git config user.email "drbccoleman@gmail.com"; git config user.name "bcacoleman"')
     # update local repo
-    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '; git pull origin master', shell=True)
+    subprocess.call('cd ' + config.config['HOME_DIRECTORY'] + '; git config pull.rebase false ;git pull origin master', shell=True)
 
     # Call for Clone of JHU Data, later deleted before committing to Repo
     print('Cloning JHU Data')
