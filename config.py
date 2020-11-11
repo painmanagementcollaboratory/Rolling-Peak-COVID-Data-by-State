@@ -2,8 +2,6 @@ import os
 
 config = {
     'HOME_DIRECTORY' : os.getcwd(),
-    'user.email' : "drbccoleman@gmail.com",
-    'user.name' : "bcacoleman"
 }
 
 
