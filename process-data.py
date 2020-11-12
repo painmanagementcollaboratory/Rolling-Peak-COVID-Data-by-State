@@ -316,8 +316,9 @@ def command_verification(command):
 
 
 def main():
-    subprocess.call('git config --global user.name "bcacoleman"',shell=True)
-    subprocess.call('git config --global user.email "bcacoleman@users.noreply.github.com"', shell=True)
+    subprocess.call('git commit --amend --reset-author',shell=True)
+    subprocess.call('git config user.name "bcacoleman"',shell=True)
+    subprocess.call('git config user.email "bcacoleman@users.noreply.github.com"', shell=True)
     download_files()
     if command_verification("Process the files?"):
         process_states_data()
