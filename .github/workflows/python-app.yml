@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: My first action
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     #- name: Configure git for a user
     # You may pin to the exact commit or the version.
       #uses: painmanagementcollaboratory/Rolling-Peak-COVID-Data-by-State@v2
@@ -56,5 +53,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     
     - name: Run Code
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         python process-data.py
