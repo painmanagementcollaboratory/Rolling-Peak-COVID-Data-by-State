@@ -1,5 +1,5 @@
 import os
 
 config = {
-    'HOME_DIRECTORY' : os.getcwd(),
+    'HOME_DIRECTORY' : os.getcwd()
 }
