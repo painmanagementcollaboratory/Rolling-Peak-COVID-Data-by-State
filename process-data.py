@@ -23,8 +23,6 @@ def format_date_for_row(d):
 
 
 def download_files():
-    subprocess.call('git config --global user.name "bcacoleman"; git config --global user.email "bcacoleman@users.noreply.github.com"', shell=True)
-    
     print('New Johns Hopkins COVID-19 Files Download')
     # first you have to run
     #  $ git clone https://github.com/CSSEGISandData/COVID-19.git
@@ -318,6 +316,8 @@ def command_verification(command):
 
 
 def main():
+    subprocess.call('git config --global user.name "bcacoleman"',shell=True)
+    subprocess.call('git config --global user.email "bcacoleman@users.noreply.github.com"', shell=True)
     download_files()
     if command_verification("Process the files?"):
         process_states_data()
