@@ -316,11 +316,6 @@ def command_verification(command):
 
 
 def main():
-    print('Test point 1')
-    subprocess.call('git commit --amend --reset-author',shell=True)
-    subprocess.call('git config user.name "bcacoleman"',shell=True)
-    subprocess.call('git config user.email "bcacoleman@users.noreply.github.com"', shell=True)
-    print('Test point 2')
     download_files()
     if command_verification("Process the files?"):
         process_states_data()
@@ -335,5 +330,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print('Test point 0')
     main()
