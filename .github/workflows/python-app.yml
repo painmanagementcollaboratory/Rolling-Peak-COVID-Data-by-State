@@ -28,9 +28,9 @@ jobs:
         
     - uses: actions/checkout@v1
       with:
-        name: 'PMC'
-        email: 'painmanagementcollaboratory@users.noreply.github.com'
-        actor: 'painmanagementcollaboratory'
+        #name: 'PMC'
+        #email: 'painmanagementcollaboratory@users.noreply.github.com'
+        #actor: 'painmanagementcollaboratory'
         token: '${{ secrets.GH_Token }}'
 
     - name: Set up Python 3.7
