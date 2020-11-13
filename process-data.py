@@ -33,7 +33,8 @@ def download_files():
     subprocess.call('git pull origin master', shell = True)
     subprocess.call('git config user.name "painmanagementcollaboratory"', shell=True)
     subprocess.call('git config user.email "painmanagementcollaboratory@users.noreply.github.com"', shell = True)
-    subprocess.call('git config --list', shell = True)
+    # Debugging step, call config list for review
+    # subprocess.call('git config --list', shell = True)
 
 
     # Call for Clone of JHU Data, later deleted before committing to Repo
