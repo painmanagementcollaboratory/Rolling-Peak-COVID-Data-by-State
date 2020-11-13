@@ -31,24 +31,10 @@ def download_files():
     subprocess.call('cd ' + config.config['HOME_DIRECTORY'], shell=True)
     subprocess.call('git config pull.rebase false', shell = True)
     subprocess.call('git pull origin master', shell = True)
-    
-    # Set up a sequence with while loops for testing and debugging.
-    i=1
-    while i < 2:   
-        print('\n\nOriginal Config:\n')
-        subprocess.call('git config --list', shell = True)
-        i=2
-        break
-    while i < 3:
-        subprocess.call('git config user.name "painmanagementcollaboratory"', shell=True)
-        subprocess.call('git config user.email "painmanagementcollaboratory@users.noreply.github.com"', shell = True)
-        i=3
-        break
-    while i < 4:
-        print('\n\nReoconfig:\n')
-        subprocess.call('git config --list', shell = True)
-        i=4
-        break
+    subprocess.call('git config user.name "painmanagementcollaboratory"', shell=True)
+    subprocess.call('git config user.email "painmanagementcollaboratory@users.noreply.github.com"', shell = True)
+    subprocess.call('git config --list', shell = True)
+
 
     # Call for Clone of JHU Data, later deleted before committing to Repo
     print('Cloning JHU Data')
